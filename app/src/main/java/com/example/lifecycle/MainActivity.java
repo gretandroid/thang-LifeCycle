@@ -9,13 +9,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
+// AppCompatActivity est une classe de type LifecycleOwner
 public class MainActivity extends AppCompatActivity {
 
     private TextView amountLabel;
     private EditText amountText;
     private TextView tipAmountLabel;
     private EditText tipAmountText;
+    private Observer observer;
 
     // methode de cycle de vie en Android, se déclenche au moment
     // ou l'activité est lancée.  Les initialisation s'effectuent
@@ -24,15 +25,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        amountLabel = findViewById(R.id.amountLabel);
-        amountText = findViewById(R.id.amountText);
-        tipAmountLabel = findViewById(R.id.tipAmountLabel);
-        tipAmountText = findViewById(R.id.tipAmountText);
-        if (savedInstanceState != null) {
-            String amount = savedInstanceState.getString("amount", "");
-            tipAmountLabel.setText(amount);
-        }
-        Log.d("MainActivity", "Methode onCreate");
+        observer = new Observer();
+        getLifecycle().addObserver(observer);
+//        amountLabel = findViewById(R.id.amountLabel);
+//        amountText = findViewById(R.id.amountText);
+//        tipAmountLabel = findViewById(R.id.tipAmountLabel);
+//        tipAmountText = findViewById(R.id.tipAmountText);
+//        if (savedInstanceState != null) {
+//            String amount = savedInstanceState.getString("amount", "");
+//            tipAmountLabel.setText(amount);
+//        }
+//        Log.d("MainActivity", "Methode onCreate");
     }
 
     // cette methode est appelée lors que l'activité devient
@@ -40,14 +43,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d("MainActivity", "Methode onStart");
+//        Log.d("MainActivity", "Methode onStart");
     }
 
     // L'activity obtient le focus (i.e. on peut agir à l'activité)
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("MainActivity", "Methode onResume");
+//        Log.d("MainActivity", "Methode onResume");
     }
 
     // L'activité a perdu focus (elle n'est pas/plus au premier plan)
@@ -56,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d("MainActivity", "Methode onPause");
+//        Log.d("MainActivity", "Methode onPause");
     }
 
     // l'activité n'est plus visible pour l'utilisateur
@@ -66,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d("MainActivity", "Methode onStop");
+//        Log.d("MainActivity", "Methode onStop");
     }
 
     // L'activité est sur le point de détruire (parce que terminé)
@@ -74,26 +77,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d("MainActivity", "Methode onDestroy");
+//        Log.d("MainActivity", "Methode onDestroy");
     }
 
     // appelée lors de redémarrge appli
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d("MainActivity", "Methode onRestart");
+//        Log.d("MainActivity", "Methode onRestart");
     }
 
     // permettre la sauvegarde des données utilisateur
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("amount", tipAmountLabel.getText().toString());
-        Log.d("MainActivity", "Methode onSaveInstanceState");
+//        outState.putString("amount", tipAmountLabel.getText().toString());
+//        Log.d("MainActivity", "Methode onSaveInstanceState");
     }
 
     public void calculate(View view) {
-        tipAmountLabel.setText("20");
+//        tipAmountLabel.setText("20");
 //        tipAmountText.setText("Amount");
     }
 }
